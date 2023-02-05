@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Call commitlint when commit message to ensure the commit style.
+npx --no -- commitlint --edit

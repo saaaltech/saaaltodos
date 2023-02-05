@@ -1,0 +1,20 @@
+# Follow the Conventional Commit specifications,
+# see https://www.conventionalcommits.org/en/v1.0.0/
+extends:
+  - "@commitlint/config-conventional"
+
+# Commitlint options:
+# see https://commitlint.js.org/#/reference-configuration
+rules:
+  type-enum:
+    - 2
+    - always
+    - # Please understand by reading the following comments
+      # and use appropriate keywords.
+      - feat # Add new feature(s).
+      - fix # Fix existing bug(s).
+      - test # Add test(s) for validation without adding feature(s).
+      - optm # Optimize for better performance.
+      - docs # Add docs or comments without editing other code.
+      - repo # Works on repo management rather than source code.
+      - reco # Record something unfinished as a commit.

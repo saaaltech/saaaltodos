@@ -1,0 +1,11 @@
+# Lint-staged commands to execute before git commit.
+# see https://github.com/okonet/lint-staged#readme
+# see https://github.com/okonet/lint-staged#configuration
+
+# Prettier formatter (specified by ignore configs).
+"*":
+  - "prettier --write . --ignore-unknown"
+
+# Flutter formatter, only format dart files.
+"*.dart":
+  - "dart format ."

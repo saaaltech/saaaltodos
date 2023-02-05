@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run flutter analyze to ensure there are no warns or errors in the code.
+flutter analyze
+
+# Run lint-staged to call formatters before commit.
+npx lint-staged
