@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "saaaltodos",
+  "description": "Repository management and script runner for saaaltodos.",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "husky install",
+    "prettier": "prettier --write . --ignore-unknown"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.3"
+  }
+}

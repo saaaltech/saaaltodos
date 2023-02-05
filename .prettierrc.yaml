@@ -1,0 +1,12 @@
+# Ensure code style for json, yaml and markdown.
+# see https://prettier.io/docs/en/options.html
+
+# General format options.
+useTabs: false
+tabWidth: 2
+printWidth: 80
+singleQuote: false
+
+# Markdown line width format.
+proseWrap: always
+embeddedLanguageFormatting: auto
