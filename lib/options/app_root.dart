@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:saaaltodos/components/widget_helpers.dart';
+import 'package:saaaltodos/options/preferences.dart';
 
 class AppRoot extends StatefulWidget {
   AppRoot({
     Key? key,
+    // Options handlers.
+    this.preferenceController = preference,
+
+    // Routes.
     Widget? home,
     this.routes = const <String, WidgetBuilder>{},
     this.initialRoute,
@@ -17,6 +22,9 @@ class AppRoot extends StatefulWidget {
         ? home ?? const Scaffold(body: CenterText('app root home'))
         : null;
   }
+
+  // User preferences.
+  final UserPreference preferenceController;
 
   // Routes.
   late final Widget? home;
@@ -33,6 +41,11 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
+  /// Alias of the current preference controller and
+  /// shield the global instance with same name.
+  ///
+  late final preference = widget.preferenceController;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
