@@ -6,7 +6,7 @@ class AppRoot extends StatefulWidget {
   AppRoot({
     Key? key,
     // Options handlers.
-    this.preferenceController = preference,
+    UserPreference? preferenceController,
 
     // Routes.
     Widget? home,
@@ -18,13 +18,17 @@ class AppRoot extends StatefulWidget {
     this.navigatorObservers = const <NavigatorObserver>[],
     this.builder,
   }) : super(key: key) {
+    // Options handlers.
+    this.preferenceController = preferenceController ?? preference;
+
+    // Default display.
     this.home = routes.isEmpty && initialRoute == null
         ? home ?? const Scaffold(body: CenterText('app root home'))
         : null;
   }
 
   // User preferences.
-  final UserPreference preferenceController;
+  late final UserPreference preferenceController;
 
   // Routes.
   late final Widget? home;
