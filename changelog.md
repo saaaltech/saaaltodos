@@ -28,6 +28,7 @@ Processing...
 
 ### 2023.0.1 basic user options control
 
+- [x] Establish app root container as user preferences controller.
 - [ ] Support dark mode.
 - [ ] Support multi-locales.
   - [ ] Locale json config with json schema and compile to `.arb`.
