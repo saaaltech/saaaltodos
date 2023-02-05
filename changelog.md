@@ -40,4 +40,5 @@ Processing...
 - [x] Commitlint rules and git hooks.
 - [x] Prettier formatter for json, yaml and markdown.
 - [x] Git hooks run formatter and analyzer before commit.
-- [ ] Share vscode settings and extension recommendations.
+- [x] Share vscode settings and extension recommendations.
+- [ ] Clean flutter manifest and remove unnecessary templates.
