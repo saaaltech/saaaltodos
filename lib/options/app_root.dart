@@ -4,7 +4,7 @@ import 'package:saaaltodos/options/preferences.dart';
 
 class AppRoot extends StatefulWidget {
   AppRoot({
-    Key? key,
+    GlobalKey? key,
     // Options handlers.
     UserPreference? preferenceController,
 
@@ -17,7 +17,7 @@ class AppRoot extends StatefulWidget {
     this.onUnknownRoute,
     this.navigatorObservers = const <NavigatorObserver>[],
     this.builder,
-  }) : super(key: key) {
+  }) : super(key: key ?? GlobalKey(debugLabel: 'app root')) {
     // Options handlers.
     this.preferenceController = preferenceController ?? preference;
 
@@ -45,14 +45,30 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-  /// Alias of the current preference controller and
-  /// shield the global instance with same name.
-  ///
+  // Aliases as sugars.
   late final preference = widget.preferenceController;
+  late final key = widget.key as GlobalKey;
+
+  @override
+  void initState() {
+    super.initState();
+    preference.themeMode.attach(key);
+  }
+
+  @override
+  void dispose() {
+    preference.themeMode.remove(key);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Controllers.
+      themeMode: preference.themeMode.value,
+      darkTheme: ThemeData.dark(),
+      theme: ThemeData.light(),
+
       // Routes.
       home: widget.home,
       routes: widget.routes,
