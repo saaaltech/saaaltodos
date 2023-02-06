@@ -21,14 +21,49 @@ class Option<T> extends ValueHandler<T> {
   set value(T newValue) {
     if (_value != newValue) {
       super.value = newValue;
-      for (final key in attachedStates) {
-        // ignore:invalid_use_of_protected_member
-        key.currentState?.setState(() {});
-      }
+      updateAll();
+    }
+  }
+
+  void updateAll() {
+    for (final key in attachedStates) {
+      // ignore:invalid_use_of_protected_member
+      key.currentState?.setState(() {});
     }
   }
 
   void attach(GlobalKey key) => attachedStates.add(key);
-  void remove(GlobalKey key) => attachedStates.remove(key);
+  void cancel(GlobalKey key) => attachedStates.remove(key);
   void removeAll() => attachedStates.clear();
+}
+
+class ListOption<T> extends Option<List<T>> {
+  ListOption(super.value, {this.repeatable = false}) {
+    if (!repeatable) {
+      final generator = <T>[];
+      for (final item in _value) {
+        if (!_value.contains(item)) generator.add(item);
+      }
+      _value = generator;
+    }
+  }
+
+  late bool repeatable;
+
+  void add(T item) {
+    if (repeatable || !_value.contains(item)) {
+      _value.add(item);
+      updateAll();
+    }
+  }
+
+  void remove(T item, {bool removeAll = false}) {
+    while (_value.remove(item) && removeAll) {}
+    updateAll();
+  }
+
+  void clear() {
+    _value.clear();
+    updateAll();
+  }
 }

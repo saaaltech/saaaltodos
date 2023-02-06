@@ -65,7 +65,7 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    preference.themeMode.remove(key);
+    preference.themeMode.cancel(key);
     super.dispose();
   }
 
