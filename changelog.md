@@ -29,12 +29,14 @@ Processing...
 ### 2023.0.1 basic user options control
 
 - [x] Establish app root container as user preferences controller.
-- [ ] Support dark mode.
+- [x] Support dark mode.
 - [ ] Support multi-locales.
+  - [ ] Try to customize locale setting class.
   - [ ] Locale json config with json schema and compile to `.arb`.
   - [ ] Parse locale and get similar locale of the same language.
 - [ ] Shortcut register and modify (only code, no ui yet).
 - [ ] Detect current platform information (env and version).
+- [ ] Support switch between material and cupertino.
 
 ### 2023.0.0 initialize repository management
 

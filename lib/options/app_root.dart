@@ -4,9 +4,9 @@ import 'package:saaaltodos/options/preferences.dart';
 
 class AppRoot extends StatefulWidget {
   AppRoot({
-    Key? key,
+    GlobalKey? key,
     // Options handlers.
-    this.preferenceController = preference,
+    UserPreference? userPreference,
 
     // Routes.
     Widget? home,
@@ -17,14 +17,18 @@ class AppRoot extends StatefulWidget {
     this.onUnknownRoute,
     this.navigatorObservers = const <NavigatorObserver>[],
     this.builder,
-  }) : super(key: key) {
+  }) : super(key: key ?? GlobalKey(debugLabel: 'app root')) {
+    // Options handlers.
+    this.userPreference = userPreference ?? preference;
+
+    // Default display.
     this.home = routes.isEmpty && initialRoute == null
         ? home ?? const Scaffold(body: CenterText('app root home'))
         : null;
   }
 
   // User preferences.
-  final UserPreference preferenceController;
+  late final UserPreference userPreference;
 
   // Routes.
   late final Widget? home;
@@ -40,15 +44,39 @@ class AppRoot extends StatefulWidget {
   State<AppRoot> createState() => _AppRootState();
 }
 
-class _AppRootState extends State<AppRoot> {
-  /// Alias of the current preference controller and
-  /// shield the global instance with same name.
-  ///
-  late final preference = widget.preferenceController;
+class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
+  // Aliases as sugars.
+  late final key = widget.key as GlobalKey;
+  late final preference = widget.userPreference;
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    preference.themeMode.attach(key);
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    preference.themeMode.remove(key);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Controllers.
+      themeMode: preference.themeMode.dark ? ThemeMode.dark : ThemeMode.light,
+      darkTheme: ThemeData.dark(),
+      theme: ThemeData.light(),
+
       // Routes.
       home: widget.home,
       routes: widget.routes,
