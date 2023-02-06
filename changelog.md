@@ -35,6 +35,7 @@ Processing...
   - [ ] Parse locale and get similar locale of the same language.
 - [ ] Shortcut register and modify (only code, no ui yet).
 - [ ] Detect current platform information (env and version).
+- [ ] Support switch between material and cupertino.
 
 ### 2023.0.0 initialize repository management
 
