@@ -1,4 +1,17 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+extension StatelessHelper on StatelessWidget {
+  Brightness brightness(BuildContext context) => Theme.of(context).brightness;
+}
+
+extension StatefulHelper on State {
+  Brightness get brightness => Theme.of(context).brightness;
+}
+
+Brightness get platformBrightness {
+  return PlatformDispatcher.instance.platformBrightness;
+}
 
 class CenterText extends StatelessWidget {
   const CenterText(this.text, {Key? key}) : super(key: key);
