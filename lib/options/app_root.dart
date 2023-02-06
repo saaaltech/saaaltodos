@@ -65,7 +65,7 @@ class _AppRootState extends State<AppRoot> {
   Widget build(BuildContext context) {
     return MaterialApp(
       // Controllers.
-      themeMode: preference.themeMode.value,
+      themeMode: preference.themeMode.dark ? ThemeMode.dark : ThemeMode.light,
       darkTheme: ThemeData.dark(),
       theme: ThemeData.light(),
 
