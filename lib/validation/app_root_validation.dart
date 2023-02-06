@@ -21,7 +21,6 @@ class DarkModeValidation extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('theme mode: ${preference.themeMode.value}'),
         Text('brightness: ${brightness(context)}'),
         Text('platform: $platformBrightness'),
         Row(
