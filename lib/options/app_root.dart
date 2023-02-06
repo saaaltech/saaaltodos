@@ -6,7 +6,7 @@ class AppRoot extends StatefulWidget {
   AppRoot({
     GlobalKey? key,
     // Options handlers.
-    UserPreference? preferenceController,
+    UserPreference? userPreference,
 
     // Routes.
     Widget? home,
@@ -19,7 +19,7 @@ class AppRoot extends StatefulWidget {
     this.builder,
   }) : super(key: key ?? GlobalKey(debugLabel: 'app root')) {
     // Options handlers.
-    this.preferenceController = preferenceController ?? preference;
+    this.userPreference = userPreference ?? preference;
 
     // Default display.
     this.home = routes.isEmpty && initialRoute == null
@@ -28,7 +28,7 @@ class AppRoot extends StatefulWidget {
   }
 
   // User preferences.
-  late final UserPreference preferenceController;
+  late final UserPreference userPreference;
 
   // Routes.
   late final Widget? home;
@@ -46,7 +46,7 @@ class AppRoot extends StatefulWidget {
 
 class _AppRootState extends State<AppRoot> {
   // Aliases as sugars.
-  late final preference = widget.preferenceController;
+  late final preference = widget.userPreference;
   late final key = widget.key as GlobalKey;
 
   @override
