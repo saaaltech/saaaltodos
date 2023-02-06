@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class ValueHandler<T> {
@@ -33,19 +31,4 @@ class Option<T> extends ValueHandler<T> {
   void attach(GlobalKey key) => attachedStates.add(key);
   void remove(GlobalKey key) => attachedStates.remove(key);
   void removeAll() => attachedStates.clear();
-}
-
-class ThemeModeOption extends Option<ThemeMode> {
-  ThemeModeOption(super.value);
-
-  // Helper of theme mode change.
-  void toDark() => value = ThemeMode.dark;
-  void toLight() => value = ThemeMode.light;
-  void toSystem() => value = ThemeMode.system;
-
-  // Getter of whether dark mode and brightness.
-  Brightness get brightness => dark ? Brightness.dark : Brightness.light;
-  bool get dark => value == ThemeMode.system
-      ? PlatformDispatcher.instance.platformBrightness == Brightness.dark
-      : value == ThemeMode.dark;
 }

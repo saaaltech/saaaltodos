@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:saaaltodos/components/widget_helpers.dart';
-import 'package:saaaltodos/options/handler.dart';
 import 'package:saaaltodos/options/preferences.dart';
 
 class DarkModeValidation extends StatelessWidget {
@@ -22,6 +21,7 @@ class DarkModeValidation extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Text('theme mode: ${preference.themeMode.value}'),
         Text('brightness: ${brightness(context)}'),
         Text('platform: $platformBrightness'),
         Row(
