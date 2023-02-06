@@ -44,19 +44,27 @@ class AppRoot extends StatefulWidget {
   State<AppRoot> createState() => _AppRootState();
 }
 
-class _AppRootState extends State<AppRoot> {
+class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   // Aliases as sugars.
-  late final preference = widget.userPreference;
   late final key = widget.key as GlobalKey;
+  late final preference = widget.userPreference;
+
+  @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    preference.themeMode.adaptPlatform();
+  }
 
   @override
   void initState() {
     super.initState();
     preference.themeMode.attach(key);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     preference.themeMode.remove(key);
     super.dispose();
   }
