@@ -52,7 +52,7 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   @override
   void didChangePlatformBrightness() {
     super.didChangePlatformBrightness();
-    preference.themeMode.adaptPlatform();
+    setState(() {});
   }
 
   @override

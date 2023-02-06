@@ -28,10 +28,4 @@ class ThemeModeOption extends Option<ThemeMode> {
   void toDark() => value = ThemeMode.dark;
   void toLight() => value = ThemeMode.light;
   void toSystem() => value = ThemeMode.system;
-
-  void adaptPlatform() {
-    value = PlatformDispatcher.instance.platformBrightness == Brightness.dark
-        ? ThemeMode.dark
-        : ThemeMode.light;
-  }
 }
