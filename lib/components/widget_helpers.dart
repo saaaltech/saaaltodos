@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 extension StatelessHelper on StatelessWidget {
   Brightness brightness(BuildContext context) => Theme.of(context).brightness;
+  bool dark(BuildContext context) => brightness(context) == Brightness.dark;
 }
 
 extension StatefulHelper on State {
   Brightness get brightness => Theme.of(context).brightness;
+  bool get dark => brightness == Brightness.dark;
 }
 
 Brightness get platformBrightness {
