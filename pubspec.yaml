@@ -29,9 +29,13 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  device_info_plus: ^8.0.0
+  # Flutter official tools.
   flutter:
     sdk: flutter
+  ansicolor: ^2.0.1
+
+  # Get platform info and version.
+  device_info_plus: ^8.0.0
   package_info_plus: ^3.0.2
   path_provider: ^2.0.12
 
