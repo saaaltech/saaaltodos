@@ -1,51 +1,29 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:saaaltodos/options/handler.dart';
 
-/// Global instance of [UserShortcuts].
-///
-/// There are usually only one user shortcuts instance in the whole app.
-/// You can use it as the default value of the controller widgets.
-///
-final shortcuts = UserShortcuts();
-
-class UserShortcuts {
-  final switchTerminal = Option('value');
-}
-
-class ShortcutOption extends ListOption<SingleActivator> {
-  ShortcutOption(super.value);
-
-  List<String> get codeList => List.generate(
-        value.length,
-        (index) => value[index].code,
-      );
-
-  void addFromString(String raw) {
-    final result = parseShortcut(raw);
-    if (result != null) add(result);
-  }
-
-  void fromList(List<String> raw) {
-    final generator = <SingleActivator>[];
-    for (final code in raw) {
-      final result = parseShortcut(code);
-      if (result != null) generator.add(result);
-    }
-    value = generator;
-  }
-
-  void from(dynamic raw) {
-    if (raw is String) addFromString(raw);
-    if (raw is List<String>) fromList(raw);
-  }
-}
-
+// Code convert syntax define.
 const controlAndSep = 'control$shortcutSep';
 const shiftAndSep = 'shift$shortcutSep';
 const metaAndSep = 'meta$shortcutSep';
 const altAndSep = 'alt$shortcutSep';
 const shortcutSep = '+';
+
+/// Parse shortcuts from a dynamic raw (expect to be list string).
+///
+/// When return null, it means invalid,
+/// that the shortcut will not update.
+/// Invalid is not blank.
+///
+List<SingleActivator>? parseShortcuts(dynamic raw) {
+  if (raw is! List<String>) return null;
+
+  final generator = <SingleActivator>[];
+  for (final code in raw) {
+    final result = parseShortcut(code);
+    if (result != null) generator.add(result);
+  }
+  return generator;
+}
 
 SingleActivator? parseShortcut(dynamic raw) {
   if (raw is SingleActivator) return raw;
@@ -71,6 +49,24 @@ LogicalKeyboardKey? resolveKeyFromLabel(String raw) {
     if (key.keyLabel == raw) return key;
   }
   return null;
+}
+
+extension ShortcutGenerator on Map<Intent, List<SingleActivator>> {
+  Map<SingleActivator, Intent> get shortcuts {
+    final generator = <SingleActivator, Intent>{};
+    for (final intent in keys) {
+      for (final shortcut in this[intent]!) {
+        generator[shortcut] = intent;
+      }
+    }
+    return generator;
+  }
+}
+
+extension ShortcutsApis on List<SingleActivator> {
+  List<String> get codeList {
+    return List.generate(length, (index) => this[index].code);
+  }
 }
 
 extension SingleActivatorJsonApis on SingleActivator {
