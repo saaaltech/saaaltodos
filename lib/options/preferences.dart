@@ -11,5 +11,5 @@ final preference = UserPreference();
 class UserPreference {
   UserPreference();
 
-  final themeMode = Option(ThemeMode.system);
+  final themeMode = ThemeModeOption(ThemeMode.system);
 }
