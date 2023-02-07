@@ -11,7 +11,7 @@ class TerminalContainer extends StatefulWidget {
   }) : super(key: key ?? GlobalKey()) {
     this.terminalPad = terminalPad ??
         Container(
-          color: Colors.teal,
+          color: Colors.teal.shade300,
           child: const CenterText('terminal pad'),
         );
   }

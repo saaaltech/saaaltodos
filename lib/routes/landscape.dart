@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saaaltodos/layouts/sidebar.dart';
 import 'package:saaaltodos/layouts/terminal.dart';
 import 'package:saaaltodos/validation/app_root_validation.dart';
 
@@ -17,7 +18,9 @@ class _LandscapeLayoutState extends State<LandscapeLayout> {
 
   late final layout = TerminalContainer(
     key: terminalKey,
-    mainArea: Center(child: DarkModeValidation()),
+    mainArea: SidebarContainer(
+      mainArea: Center(child: DarkModeValidation()),
+    ),
   );
 
   @override
