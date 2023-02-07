@@ -1,0 +1,5 @@
+# Configs for flutter localization code generation.
+# see https://docs.flutter.dev/development/accessibility-and-localization/internationalization
+arb-dir: lib/locales/dist
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
