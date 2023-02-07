@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saaaltodos/environment.dart';
+import 'package:saaaltodos/layouts/terminal.dart';
 import 'package:saaaltodos/logger.dart';
 import 'package:saaaltodos/options/app_root.dart';
 import 'package:saaaltodos/validation/app_root_validation.dart';
@@ -22,8 +23,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppRoot(
       home: Scaffold(
-        body: Center(
-          child: DarkModeValidation(),
+        body: TerminalContainer(
+          mainArea: Center(child: DarkModeValidation()),
         ),
       ),
     );

@@ -1,33 +1,49 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:saaaltodos/layouts/terminal.dart';
 import 'package:saaaltodos/options/handler.dart';
 
+/// Global instance of [UserShortcuts],
+/// also as default value.
+///
 final shortcuts = UserShortcuts(
-  global: ShortcutsOptions.fromIntents({}),
+  global: ShortcutsOptions.fromIntents({
+    // Terminal container show and hide control.
+    const TerminalIntent(): [
+      const SingleActivator(LogicalKeyboardKey.keyK, control: true),
+      const SingleActivator(LogicalKeyboardKey.keyK, meta: true),
+    ],
+    const TerminalIntent(onlyHide: true): [
+      const SingleActivator(LogicalKeyboardKey.escape),
+    ],
+  }),
 );
 
 class UserShortcuts {
   UserShortcuts({required this.global});
 
+  /// Global shortcuts which are supposed to be registered onto app root.
   final ShortcutsOptions global;
 }
 
 class ShortcutsOptions extends Option<Map<SingleActivator, Intent>> {
   ShortcutsOptions(super.value);
 
-  factory ShortcutsOptions.fromIntents(Map<Intent, SingleActivator> map) {
+  factory ShortcutsOptions.fromIntents(Map<Intent, List<SingleActivator>> map) {
     final generator = <SingleActivator, Intent>{};
     for (final intent in map.keys) {
-      if (!generator.containsKey(map[intent])) {
-        generator[map[intent]!] = intent;
-        continue;
-      }
+      for (final shortcut in map[intent]!) {
+        if (!generator.containsKey(shortcut)) {
+          generator[shortcut] = intent;
+          continue;
+        }
 
-      throw Exception(
-        'intents conflict for shortcut [${map[intent]!.code}]:\n'
-        '- ${generator[map[intent]]}\n'
-        '- $intent',
-      );
+        throw Exception(
+          'intents conflict for shortcut [${shortcut.code}]:\n'
+          '- ${generator[map[intent]]}\n'
+          '- $intent',
+        );
+      }
     }
 
     return ShortcutsOptions(generator);
