@@ -38,7 +38,8 @@ class Option<T> extends ValueHandler<T> {
 }
 
 class ListOption<T> extends Option<List<T>> {
-  ListOption(super.value, {this.repeatable = false}) {
+  ListOption({List<T>? defaultValue, this.repeatable = false})
+      : super(defaultValue ?? []) {
     if (!repeatable) {
       final generator = <T>[];
       for (final item in _value) {
@@ -66,4 +67,8 @@ class ListOption<T> extends Option<List<T>> {
     _value.clear();
     updateAll();
   }
+}
+
+class MapOption<K, V> extends Option<Map<K, V>> {
+  MapOption({Map<K, V>? defaultValue}) : super(defaultValue ?? {});
 }
