@@ -1,3 +1,12 @@
+import 'dart:math';
+
+/// A global random generator to save cost.
+final random = Random();
+
+extension RandomHash on Random {
+  int get nextHash => nextDouble().hashCode;
+}
+
 extension MaxLength on List<String> {
   int get maxLength {
     int max = 0;
