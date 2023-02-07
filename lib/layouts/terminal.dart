@@ -26,6 +26,7 @@ class TerminalContainer extends StatefulWidget {
 class _TerminalContainerState extends State<TerminalContainer> {
   bool _showTerminal = false;
 
+  bool get show => _showTerminal;
   void showTerminal() => setState(() => _showTerminal = true);
   void hideTerminal() => setState(() => _showTerminal = false);
   void shiftTerminal({bool onlyHide = false}) {
@@ -43,24 +44,14 @@ class _TerminalContainerState extends State<TerminalContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Actions(
-      actions: {
-        TerminalIntent: CallbackAction<TerminalIntent>(
-          onInvoke: (intent) => intent.execute(widget.key as GlobalKey),
-        )
-      },
-      child: Focus(
-        autofocus: true,
-        child: Stack(
-          children: [
-            widget.mainArea,
-            Offstage(
-              offstage: !_showTerminal,
-              child: widget.terminalPad,
-            ),
-          ],
+    return Stack(
+      children: [
+        widget.mainArea,
+        Offstage(
+          offstage: !_showTerminal,
+          child: widget.terminalPad,
         ),
-      ),
+      ],
     );
   }
 }
