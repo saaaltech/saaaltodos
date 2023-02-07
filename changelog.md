@@ -34,7 +34,7 @@ Processing...
   - [ ] Try to customize locale setting class.
   - [ ] Locale json config with json schema and compile to `.arb`.
   - [ ] Parse locale and get similar locale of the same language.
-- [ ] Shortcut register and modify (only code, no ui yet).
+- [x] Shortcut register and modify (only code, no ui yet).
 - [x] Detect current platform information (env and version).
 - [x] Simple colorful logger of command line.
 - [ ] Support switch between material and cupertino.
