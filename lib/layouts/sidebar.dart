@@ -39,7 +39,7 @@ class _SidebarContainerState extends State<SidebarContainer> {
 
   @override
   void dispose() {
-    preference.textDirection.cancel(key);
+    preference.textDirection.remove(key);
     super.dispose();
   }
 
