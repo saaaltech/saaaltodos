@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class StatesHandler {
@@ -13,6 +15,11 @@ class StatesHandler {
       key.currentState?.setState(() {});
     }
   }
+}
+
+class ActionsHandler<T> {
+  final broadcaster = StreamController<T>.broadcast();
+  final actions = <int, StreamSubscription<T>>{};
 }
 
 class Option<T> extends StatesHandler {
