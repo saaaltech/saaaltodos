@@ -17,7 +17,7 @@ class _LandscapeLayoutState extends State<LandscapeLayout> {
 
   late final layout = TerminalContainer(
     key: terminalKey,
-    mainArea: DarkModeValidation(),
+    mainArea: Center(child: DarkModeValidation()),
   );
 
   @override

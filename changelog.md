@@ -13,6 +13,7 @@ Processing...
 ### 2023.0.2 desktop and pad layout (landscape layout)
 
 - [x] Terminal pad container layout.
+- [x] Establish basic routes system.
 - [ ] Sidebar layout (left and right, rtl and rtl).
   - [ ] Sidebar layout on one side.
   - [ ] Sidebar layout on both side.

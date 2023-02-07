@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:saaaltodos/environment.dart';
-import 'package:saaaltodos/layouts/terminal.dart';
 import 'package:saaaltodos/logger.dart';
 import 'package:saaaltodos/options/app_root.dart';
-import 'package:saaaltodos/validation/app_root_validation.dart';
+import 'package:saaaltodos/routes/landscape.dart';
+import 'package:saaaltodos/routes/portrait.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +22,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppRoot(
-      home: Scaffold(
-        body: TerminalContainer(
-          mainArea: Center(child: DarkModeValidation()),
-        ),
-      ),
+      initialRoute: platform.isPortrait ? portraitRoute : landscapeRoute,
+      routes: {
+        landscapeRoute: (context) => const LandscapeLayout(),
+        portraitRoute: (context) => const PortraitLayout(),
+      },
     );
   }
 }
