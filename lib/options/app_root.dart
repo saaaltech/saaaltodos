@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:saaaltodos/components/widget_helpers.dart';
 import 'package:saaaltodos/options/preferences.dart';
 import 'package:saaaltodos/options/shortcut.dart';
@@ -60,6 +61,7 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     preference.themeMode.attach(key);
+    preference.locale.attach(key);
     shortcuts.global.attach(key);
     WidgetsBinding.instance.addObserver(this);
   }
@@ -68,6 +70,7 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     preference.themeMode.cancel(key);
+    preference.locale.cancel(key);
     shortcuts.global.cancel(key);
     super.dispose();
   }
@@ -80,6 +83,11 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
       darkTheme: ThemeData.dark(),
       theme: ThemeData.light(),
       shortcuts: shortcuts.global.value,
+
+      // Locale control.
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: preference.locale.value,
 
       // Routes.
       home: widget.home,
