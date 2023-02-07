@@ -39,6 +39,9 @@ dependencies:
   package_info_plus: ^3.0.2
   path_provider: ^2.0.12
 
+  # Other dependencies.
+  change_case: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

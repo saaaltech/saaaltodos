@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
 
-class ValueHandler<T> {
-  ValueHandler(this._value);
+class StatesHandler {
+  final attachedStates = <GlobalKey>[];
 
-  T _value;
+  void attach(GlobalKey key) => attachedStates.add(key);
+  void cancel(GlobalKey key) => attachedStates.remove(key);
+  void removeAll() => attachedStates.clear();
 
-  // ignore:unnecessary_getters_setters
-  T get value => _value;
-  set value(T newValue) {
-    _value = newValue;
+  void updateStates() {
+    for (final key in attachedStates) {
+      // ignore:invalid_use_of_protected_member
+      key.currentState?.setState(() {});
+    }
   }
 }
 
-class Option<T> extends ValueHandler<T> {
-  Option(super.value);
+class Option<T> extends StatesHandler {
+  Option(this._value);
 
-  final attachedStates = <GlobalKey>[];
+  T _value;
 
-  @override
+  T get value => _value;
+
   set value(T newValue) {
     if (_value != newValue) {
-      super.value = newValue;
-      for (final key in attachedStates) {
-        // ignore:invalid_use_of_protected_member
-        key.currentState?.setState(() {});
-      }
+      _value = newValue;
+      updateStates();
     }
   }
 
-  void attach(GlobalKey key) => attachedStates.add(key);
-  void remove(GlobalKey key) => attachedStates.remove(key);
-  void removeAll() => attachedStates.clear();
+  void update(T Function(T) setter) {
+    _value = setter(_value);
+    updateStates();
+  }
 }
