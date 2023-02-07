@@ -31,7 +31,7 @@ Processing...
 - [x] Establish app root container as user preferences controller.
 - [x] Support dark mode.
 - [ ] Support multi-locales.
-  - [ ] Locale json config with json schema and compile to `.arb`.
+  - [x] Locale json config with json schema and compile to `.arb`.
   - [ ] Parse locale and get similar locale of the same language.
 - [x] Shortcut register and modify (only code, no ui yet).
 - [x] Detect current platform information (env and version).
