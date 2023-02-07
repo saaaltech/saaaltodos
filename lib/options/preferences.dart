@@ -17,6 +17,7 @@ class UserPreference {
 
   final themeMode = ThemeModeOption(ThemeMode.system);
   final locale = LocaleOption(defaultLocale);
+  final textDirection = TextDirectionOption(TextDirectionMode.asLocale);
 }
 
 class ThemeModeOption extends Option<ThemeMode> {
@@ -89,4 +90,21 @@ class LocaleOption extends Option<Locale> {
 
     if (index != -1) value = AppLocalizations.supportedLocales[index];
   }
+}
+
+enum TextDirectionMode {
+  asLocale,
+  forceRtl,
+  forceLtr;
+}
+
+class TextDirectionOption extends Option<TextDirectionMode> {
+  TextDirectionOption(super.value);
+
+  bool rtl(BuildContext context) => value == TextDirectionMode.asLocale
+      ? AppLocalizations.of(context)!.rtl == 'true'
+      : value == TextDirection.rtl;
+
+  TextDirection resolve(BuildContext context) =>
+      rtl(context) ? TextDirection.rtl : TextDirection.ltr;
 }

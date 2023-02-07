@@ -3,6 +3,11 @@
   "type": "object",
   "required": ["theLanguageName", "theLocaleAreaName"],
   "properties": {
+    "rtl": {
+      "type": "string",
+      "enum": ["true", "false"],
+      "$comment": "Default value is \"false\", else means true."
+    },
     "theLanguageName": { "type": "string" },
     "theLocaleAreaName": { "type": "string" }
   }

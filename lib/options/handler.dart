@@ -6,7 +6,7 @@ class StatesHandler {
   final attachedStates = <GlobalKey>[];
 
   void attach(GlobalKey key) => attachedStates.add(key);
-  void cancel(GlobalKey key) => attachedStates.remove(key);
+  void remove(GlobalKey key) => attachedStates.remove(key);
   void removeAll() => attachedStates.clear();
 
   void updateStates() {
