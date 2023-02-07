@@ -1,5 +1,38 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:saaaltodos/options/handler.dart';
+
+final shortcuts = UserShortcuts(
+  global: ShortcutsOptions.fromIntents({}),
+);
+
+class UserShortcuts {
+  UserShortcuts({required this.global});
+
+  final ShortcutsOptions global;
+}
+
+class ShortcutsOptions extends Option<Map<SingleActivator, Intent>> {
+  ShortcutsOptions(super.value);
+
+  factory ShortcutsOptions.fromIntents(Map<Intent, SingleActivator> map) {
+    final generator = <SingleActivator, Intent>{};
+    for (final intent in map.keys) {
+      if (!generator.containsKey(map[intent])) {
+        generator[map[intent]!] = intent;
+        continue;
+      }
+
+      throw Exception(
+        'intents conflict for shortcut [${map[intent]!.code}]:\n'
+        '- ${generator[map[intent]]}\n'
+        '- $intent',
+      );
+    }
+
+    return ShortcutsOptions(generator);
+  }
+}
 
 // Code convert syntax define.
 const controlAndSep = 'control$shortcutSep';

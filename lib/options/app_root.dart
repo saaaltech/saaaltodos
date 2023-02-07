@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saaaltodos/components/widget_helpers.dart';
 import 'package:saaaltodos/options/preferences.dart';
+import 'package:saaaltodos/options/shortcut.dart';
 
 class AppRoot extends StatefulWidget {
   AppRoot({
@@ -59,6 +60,7 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     preference.themeMode.attach(key);
+    shortcuts.global.attach(key);
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -66,6 +68,7 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     preference.themeMode.cancel(key);
+    shortcuts.global.cancel(key);
     super.dispose();
   }
 
@@ -76,6 +79,7 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
       themeMode: preference.themeMode.dark ? ThemeMode.dark : ThemeMode.light,
       darkTheme: ThemeData.dark(),
       theme: ThemeData.light(),
+      shortcuts: shortcuts.global.value,
 
       // Routes.
       home: widget.home,
