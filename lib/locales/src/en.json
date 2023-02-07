@@ -1,5 +1,6 @@
 {
   "$schema": "../schema.json",
+  "rtl": "false",
   "theLanguageName": "English",
   "theLocaleAreaName": "United States"
 }
