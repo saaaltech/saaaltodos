@@ -37,7 +37,6 @@ Processing...
 - [x] Shortcut register and modify (only code, no ui yet).
 - [x] Detect current platform information (env and version).
 - [x] Simple colorful logger of command line.
-- [ ] Support switch between material and cupertino.
 
 ### 2023.0.0 initialize repository management
 
