@@ -1,29 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ValueHandler<T> {
-  ValueHandler(this._value);
-
-  T _value;
-
-  // ignore:unnecessary_getters_setters
-  T get value => _value;
-  set value(T newValue) {
-    _value = newValue;
-  }
-}
-
-class Option<T> extends ValueHandler<T> {
-  Option(super.value);
-
+class StatesHandler {
   final attachedStates = <GlobalKey>[];
 
-  @override
-  set value(T newValue) {
-    if (_value != newValue) {
-      super.value = newValue;
-      updateAll();
-    }
-  }
+  void attach(GlobalKey key) => attachedStates.add(key);
+  void cancel(GlobalKey key) => attachedStates.remove(key);
+  void removeAll() => attachedStates.clear();
 
   void updateAll() {
     for (final key in attachedStates) {
@@ -31,15 +13,27 @@ class Option<T> extends ValueHandler<T> {
       key.currentState?.setState(() {});
     }
   }
-
-  void attach(GlobalKey key) => attachedStates.add(key);
-  void cancel(GlobalKey key) => attachedStates.remove(key);
-  void removeAll() => attachedStates.clear();
 }
 
-class ListOption<T> extends Option<List<T>> {
-  ListOption({List<T>? defaultValue, this.repeatable = false})
-      : super(defaultValue ?? []) {
+class Option<T> extends StatesHandler {
+  Option(this._value);
+
+  T _value;
+
+  T get value => _value;
+
+  set value(T newValue) {
+    if (_value != newValue) {
+      _value = newValue;
+      updateAll();
+    }
+  }
+}
+
+class ListOption<T> extends StatesHandler {
+  ListOption({List<T>? defaultValue, this.repeatable = false}) {
+    _value = defaultValue ?? [];
+
     if (!repeatable) {
       final generator = <T>[];
       for (final item in _value) {
@@ -48,6 +42,8 @@ class ListOption<T> extends Option<List<T>> {
       _value = generator;
     }
   }
+
+  late final List<T> _value;
 
   late bool repeatable;
 
