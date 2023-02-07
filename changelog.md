@@ -12,7 +12,7 @@ Processing...
 
 ### 2023.0.2 desktop and pad layout (landscape layout)
 
-- [ ] Terminal pad container layout.
+- [x] Terminal pad container layout.
 - [ ] Sidebar layout (left and right, rtl and rtl).
   - [ ] Sidebar layout on one side.
   - [ ] Sidebar layout on both side.
@@ -30,7 +30,7 @@ Processing...
 
 - [x] Establish app root container as user preferences controller.
 - [x] Support dark mode.
-- [ ] Support multi-locales.
+- [x] Support multi-locales.
   - [x] Locale json config with json schema and compile to `.arb`.
   - [x] Parse locale and get similar locale of the same language.
 - [x] Shortcut register and modify (only code, no ui yet).
