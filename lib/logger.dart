@@ -1,6 +1,14 @@
 import 'package:ansicolor/ansicolor.dart';
-import 'package:saaaltodos/environment.dart';
 import 'package:saaaltodos/extensions.dart';
+
+// kDebugMode and other outer imports might cause exceptions
+// for introducing unsupported packages (like dart:ui) on dart cli.
+final _debug = _isDebug;
+bool get _isDebug {
+  bool flag = false;
+  assert(flag = true);
+  return flag;
+}
 
 final defaultColor = AnsiPen()..black();
 final gray = AnsiPen()..gray(level: 0.618);
@@ -39,7 +47,7 @@ class Logger {
     _last = timestamp;
 
     if (!enable) return;
-    if (debugOnly && !debug) return;
+    if (debugOnly && !_debug) return;
 
     // ignore: avoid_print
     print(
