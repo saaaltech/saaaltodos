@@ -30,8 +30,8 @@ class Option<T> extends StatesHandler {
   }
 }
 
-class ListOption<T> extends StatesHandler {
-  ListOption({List<T>? defaultValue, this.repeatable = false}) {
+class ListOptions<T> extends StatesHandler {
+  ListOptions({List<T>? defaultValue, this.repeatable = false}) {
     _value = defaultValue ?? [];
 
     if (!repeatable) {
@@ -65,6 +65,30 @@ class ListOption<T> extends StatesHandler {
   }
 }
 
-class MapOption<K, V> extends Option<Map<K, V>> {
-  MapOption({Map<K, V>? defaultValue}) : super(defaultValue ?? {});
+class MapOptions<K, V> extends StatesHandler {
+  MapOptions({Map<K, V>? defaultValue}) {
+    _value = defaultValue ?? {};
+  }
+
+  late final Map<K, V> _value;
+
+  void set(K key, V value) {
+    _value[key] = value;
+    updateAll();
+  }
+
+  void sets(Map<K, V> map) {
+    _value.addAll(map);
+    updateAll();
+  }
+
+  void remove(K key) {
+    _value.remove(key);
+    updateAll();
+  }
+
+  void clear() {
+    _value.clear();
+    updateAll();
+  }
 }
